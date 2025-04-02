@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT PORTAL</title>
+    <script>
+        function generateCaptcha() {
+            let captcha = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById("captcha-text").innerText = captcha;
+            document.getElementById("captcha-hidden").value = captcha;
+        }
+
+        function validateCaptcha() {
+            let enteredCaptcha = document.getElementById("captcha-input").value;
+            let actualCaptcha = document.getElementById("captcha-hidden").value;
+            if (enteredCaptcha != actualCaptcha) {
+                alert("Incorrect CAPTCHA. Please try again.");
+                return false;
+            }
+            return validateLogin();
+        }
+
+        function validateLogin() {
+            let userId = document.getElementById("user-id").value;
+            let password = document.getElementById("password").value;
+            if (userId === "813823106048" && password === "22-10-2005") {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+                document.getElementById("login-time").innerText = new Date().toLocaleTimeString('en-GB');
+                return false;
+            } else {
+                alert("Invalid ID or Password.");
+                return false;
+            }
+        }
+
+        function logout() {
+            document.getElementById("login-container").style.display = "block";
+            document.getElementById("dashboard").style.display = "none";
+        }
+
+        window.onload = generateCaptcha;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('C:/Users/dell/Pictures/unnamed.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .captcha {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .captcha img {
+            width: 45px;
+            height: 30px;
+            cursor: pointer;
+        }
+        button {
+            width: 50%;
+            font-size: 16px;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        .header {
+            background: #004A99;
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .header h2 {
+            margin: 5px 0;
+            text-align: center;
+        }
+        .header .profile-container {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+        .header .profile-container img {
+            width: 60px;
+            height: 60px;
+            border: 2px solid white;
+            border-radius: 0;
+            margin-left: 10px;
+        }
+        .dashboard-container {
+            margin-top: 50px;
+        }
+        .button {
+            display: inline-block;
+            padding: 20px;
+            margin: 20px;
+            width: 150px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            background: #f0f0f0;
+            text-align: center;
+        }
+        .button:hover {
+            background: #ddd;
+        }
+        .logout {
+            color: red;
+            cursor: pointer;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+        }
+        .running-text {
+            background-color: #f0f0f0;
+            color: black;
+            padding: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .running-text span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: running-text-animation 15s linear infinite;
+        }
+        @keyframes running-text-animation {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-container" class="container">
+        <div class="running-text">
+            <span>*RESULT FOR NOV/DEC 2024 EXAMINATION IS PUBLISHED*</span>
+        </div>
+        <img src="C:/Users/dell/Pictures/sara/college.jpg" alt="College Logo" style="width: 80px; height: 80px;">
+        <input type="text" id="user-id" placeholder="Enter ID" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <div class="captcha">
+            <span id="captcha-text"></span>
+            <input type="hidden" id="captcha-hidden">
+            <img src="C:/Users/dell/Pictures/sara/recaptcha.png" alt="Reset CAPTCHA" onclick="generateCaptcha()">
+        </div>
+        <input type="text" id="captcha-input" placeholder="Enter CAPTCHA" required>
+        <button onclick="return validateCaptcha()">Log In</button>
+        <div class="footer">
+            &copy; This is a student portal. All rights reserved.
+        </div>
+    </div>
+
+    <div id="dashboard" style="display: none;">
+        <div class="header">
+            <img src="C:/Users/dell/Pictures/sara/college.jpg" alt="College Logo" style="width: 80px; height: 80px;">
+            <h2>SARANATHAN COLLEGE OF ENGINEERING (AUTONOMOUS)<br>Venkateswara Nagar,Panjappur - Tiruchirapalli - 620012<br>Approved By AICTE, New Delhi & Affliated to Anna University.<br>Accredited by NAAC and NBA.</h2>
+            <div class="profile-container">
+                <span>Welcome <strong>KEERTHIKARAN THIRUGNANAM</strong><br>ID: 813823106048<br>Login Time: <span id="login-time"></span></span>
+                <img src="C:/Users/dell/Pictures/sara/813823106048.jpg" alt="Student Photo">
+            </div>
+        </div>
+        <div class="dashboard-container">
+            <a href="exam_result.html" class="button" target="_blank">Exam Result</a>
+            <span class="button logout" onclick="logout()">Logout</span>
+        </div>
+        <div class="footer">
+            &copy; This is a student portal. All rights reserved.
+        </div>
+    </div>
+
+</body>
+</html>
